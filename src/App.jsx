@@ -1,7 +1,7 @@
-import { useForm } from 'react-hook-form';
+import {useForm} from 'react-hook-form';
 import * as yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { useEffect, useRef } from 'react';
+import {yupResolver} from '@hookform/resolvers/yup';
+import {useEffect, useRef} from 'react';
 import styles from './Styles.module.css';
 
 const sendFormData = (formData) => {
@@ -29,7 +29,7 @@ export const App = () => {
 	const {
 		register,
 		handleSubmit,
-		formState: { errors, isValid },
+		formState: {errors, isValid},
 		watch,
 	} = useForm({
 		defaultValues: {
@@ -41,9 +41,9 @@ export const App = () => {
 
 	const buttonRef = useRef(null); // Создаем ref для кнопки
 
-	// Эффект для отслеживания изменений и установки фокуса
+
 	useEffect(() => {
-		// Проверяем, что форма валидна и все поля заполнены
+
 		const values = watch();
 		const allFieldsFilled = values.login && values.password && values.confirmPassword;
 
@@ -63,12 +63,27 @@ export const App = () => {
 	return (
 		<div className={styles.app}>
 			<form onSubmit={handleSubmit(onSubmit)}>
-				{loginError && <div className={styles.errorMessage}>{loginError}</div>}
-				<input name="login" type="text" {...register('login')} placeholder='Почта' />
-				{passwordError && <div className={styles.errorMessage}>{passwordError}</div>}
-				<input name="password" type="password" {...register('password')} placeholder='Пароль' />
-				{confirmError && <div className={styles.errorMessage}>{confirmError}</div>}
-				<input name="confirmPassword" type="password" {...register('confirmPassword')} placeholder='Повторите пароль' />
+				{loginError &&
+					<div className={styles.errorMessage}>{loginError}</div>}
+				<input
+					name="login"
+					type="text" {...register('login')}
+					placeholder='Почта'
+				/>
+				{passwordError &&
+					<div className={styles.errorMessage}>{passwordError}</div>}
+				<input
+					name="password"
+					type="password" {...register('password')}
+					placeholder='Пароль'
+				/>
+				{confirmError &&
+					<div className={styles.errorMessage}>{confirmError}</div>}
+				<input
+					name="confirmPassword"
+					type="password" {...register('confirmPassword')}
+					placeholder='Повторите пароль'
+				/>
 				<button
 					type="submit"
 					disabled={!!loginError || !!passwordError || !!confirmError}
